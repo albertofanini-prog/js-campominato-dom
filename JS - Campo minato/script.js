@@ -63,36 +63,36 @@ play.addEventListener('click',()=>{
     switch(difficult.value){
         case 'easy':
             squareGen(100, 10);
-            rows = 10;
-            columns = 10;
+            //rows = 10;
+            //columns = 10;
             break;
 
         case 'medium':
             squareGen(81,9);
-            rows = 9;
-            columns = 9;
+            //rows = 9;
+            //columns = 9;
             break;
 
         case 'crazy':
             squareGen(49,7);
-            rows = 7;
-            columns = 7;
+            //rows = 7;
+            //columns = 7;
             break;
         default:
             squareGen(100, 10);
-            rows = 10;
-            columns = 10;
+            //rows = 10;
+            //columns = 10;
         //const squareSize = rows * columns;
         //console.log(rows, columns, squareNumber)
 
-        squareSize = `calc(100% / ${columns})`
+        //squareSize = `calc(100% / ${columns})`
         function squareGen(rows, columns){
             grid.innerHTML= '';
             for(let i= 0; i < rows; i++){
                 //Generare il container
                 let square = document.createElement('div');
                 //Grandezza cella
-                square.style.width = squareSize
+                //square.style.width = squareSize
                 //Gnerare la cella
                 square.classList.add('square');
                 //Impostare la dimensione della cella
@@ -135,3 +135,13 @@ function colora(square){
     //Altrimenti la cella cliccata si colora di azzurro e l'user può continuare a cliccare le altre celle
 //La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo di n corretti
 //Al termine della partita comunicare il punteggio
+
+//Creare array vuuoto per n bombe
+let nBomb = [];
+//Creare numeri random
+function nRandom(min, max){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+//Creare numeri bombe

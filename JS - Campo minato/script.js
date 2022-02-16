@@ -61,3 +61,25 @@ const start = () =>{
 
 //Assegnare l'evento al button
 play.addEventListener('click',start);
+
+//Generare numeri random(bombe)
+function getRandomIntInclusive(min,max){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random()*(max - min + 1) +min);
+}
+
+//Creare array in cui inserire i numeri (bombe)
+const bombs = [];
+
+//Generare numeri randomi da 1 a 16 senza doppioni
+do{
+    //Assegnare numeri
+    const random = getRandomIntInclusive(1,16);
+    
+    //Se il numero è mancante pushare
+    if (!bombs.includes(random)){
+        bombs.push(random);
+    }
+}while (bombs.length < 16);
+

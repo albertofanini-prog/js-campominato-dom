@@ -54,6 +54,11 @@ body{
     cursor: pointer;
 }
 
-.blue{
+.selected{
     background-color: blue;
+    color: white;
+}
+
+.bomb{
+    background-color: red;
 }

@@ -46,8 +46,34 @@ const start = () =>{
             column = 10;
     }
 
+    //Nominare le bombe
+    //let= bombs;
+    
+    bombs = bombGenerator(16, 1, square)
+
     //Resettare la pagina alla fine dello swicth
     game.innerHTML = '';
+
+    function cellCallback(){
+        const element = this;
+        if (isBomb(this.innerHTML,bombs)){
+            element.classList.add('bombBox');
+        } else{
+            element.classList.add('clickedBox');
+        }
+
+        element.removeEventListener('click', cellCallback);
+    }
+
+    function isBomb(num, bombs){
+
+
+        if(bombs.includes(parseInt(num))){
+            return true;
+        } else{
+            return false;
+        }
+    }
 
     //Creare il ciclo che genera i numeri e le caselle
     for(let i = 0; i < square; i++){
@@ -55,6 +81,7 @@ const start = () =>{
         box.classList.add('box');
         box.style.width = `calc(100% / ${column})`;
         box.append(i + 1);
+        box.addEventListener('click', cellCallback);
         game.append(box);
     }
 }
@@ -62,24 +89,26 @@ const start = () =>{
 //Assegnare l'evento al button
 play.addEventListener('click',start);
 
-//Generare numeri random(bombe)
+
+function bombGenerator(nBombs, min, max){
+    const bombs = [];
+    do{
+        const num = getRandomIntInclusive(min,max);
+
+        if(bombs.includes(num) === false){
+            bombs.push(num);
+
+        }
+
+    } while (bombs.length < nBombs)
+
+        console.log(bombs)
+    return bombs;
+}
+ 
+//Formula numero random
 function getRandomIntInclusive(min,max){
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random()*(max - min + 1) +min);
 }
-
-//Creare array in cui inserire i numeri (bombe)
-const bombs = [];
-
-//Generare numeri randomi da 1 a 16 senza doppioni
-do{
-    //Assegnare numeri
-    const random = getRandomIntInclusive(1,16);
-    
-    //Se il numero è mancante pushare
-    if (!bombs.includes(random)){
-        bombs.push(random);
-    }
-}while (bombs.length < 16);
-
